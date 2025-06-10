@@ -3,6 +3,9 @@
 ## 概要
 画像の薄い部分を塗りつぶす映像エフェクト
 
+![ぬりつぶし](https://github.com/user-attachments/assets/b42e63c2-1607-4800-9428-4f4c53a2991a)
+上の画像ではモザイクと併用
+
 ## 導入方法
 ### [最新バージョンをダウンロード](https://github.com/tetra-te/AlphaFill/releases/latest)
 ダウンロードしたファイルをダブルクリックして、表示される画面にしたがってインストールしてください。
@@ -22,7 +25,7 @@
 ## アンインストール方法
 1. YMM4を起動して`ヘルプ(H)`>`その他`>`プラグインフォルダを開く`をクリックする。
 2. YMM4を終了する。
-3. `RatioCropEffect`という名前のフォルダを削除する。
+3. `AlphaFillEffect`という名前のフォルダを削除する。
 
 ## ライセンス
 [CC0 1.0 Universal](./LICENSE)
