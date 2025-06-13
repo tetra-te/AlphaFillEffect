@@ -12,40 +12,14 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="VideoEffect\**" />
-	  <EmbeddedResource Remove="VideoEffect\**" />
-	  <None Remove="VideoEffect\**" />
-	  <Page Remove="VideoEffect\**" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <None Remove="PixelShader.cso" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<!--このプロジェクトをベースにプラグインを開発する場合は「ここから」～「ここまで」の部分を削除する-->
-		<!--ここから-->
-		<COMReference Include="SpeechLib">
-			<WrapperTool>tlbimp</WrapperTool>
-			<VersionMinor>4</VersionMinor>
-			<VersionMajor>5</VersionMajor>
-			<Guid>c866ca3a-32f7-11d2-9602-00c04f8ee628</Guid>
-			<Lcid>0</Lcid>
-			<Isolated>false</Isolated>
-			<EmbedInteropTypes>true</EmbedInteropTypes>
-		</COMReference>
-		<EmbeddedResource Include="PixelShader.cso" />
-		<EmbeddedResource Update="Localization\Resource.resx">
-			<LastGenOutput>Resource.Designer.cs</LastGenOutput>
-			<Generator>ResXFileCodeGenerator</Generator>
-		</EmbeddedResource>
-		<Compile Update="Localization\Resource.Designer.cs">
-			<DependentUpon>Resource.resx</DependentUpon>
-			<DesignTime>True</DesignTime>
-			<AutoGen>True</AutoGen>
-		</Compile>
-		<!--ここまで-->
-		
+	  <EmbeddedResource Include="PixelShader.cso" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<Reference Include="YukkuriMovieMaker.Controls">
 			<HintPath>$(YMM4DirPath)YukkuriMovieMaker.Controls.dll</HintPath>
 		</Reference>

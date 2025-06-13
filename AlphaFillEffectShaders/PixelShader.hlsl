@@ -8,6 +8,7 @@ cbuffer constants : register(b0)
     float green : packoffset(c0.z);
     float blue : packoffset(c0.w);
     float invert : packoffset(c1.x);
+    float keepColor : packoffset(c1.y);
 }; 
 
 float4 main(
@@ -18,19 +19,39 @@ float4 main(
 {
 	float4 color = InputTexture.Sample(InputSampler, uv0.xy);
 	
-	if (invert == 0)
+    if (keepColor == 0)
     {
-        if (color.a >= threshold)
+        if (invert == 0)
         {
-            color = float4(red, green, blue, 1);
-        }       
+            if (color.a >= threshold)
+            {
+                color = float4(red, green, blue, 1);
+            }
+        }
+        else
+        {
+            if (color.a < threshold)
+            {
+                color = float4(red, green, blue, 1);
+            }
+        }
     }
-	else
+    else
     {
-        if (color.a < threshold)
+        if (invert == 0)
         {
-            color = float4(red, green, blue, 1);
-        }     
+            if (color.a >= threshold)
+            {
+                color.rgb /= color.a;
+            }
+        }
+        else
+        {
+            if (color.a < threshold)
+            {
+                color.rgb /= color.a;
+            }
+        }
     }
 
     return color;

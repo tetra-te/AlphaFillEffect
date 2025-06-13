@@ -1,4 +1,5 @@
-﻿using Vortice.Direct2D1;
+﻿using AlphaFillEffect;
+using Vortice.Direct2D1;
 using YukkuriMovieMaker.Commons;
 using YukkuriMovieMaker.Player.Video;
 
@@ -9,6 +10,7 @@ namespace YMM4SamplePlugin.VideoEffect.SampleHLSLShaderVideoEffect
         readonly AlphaFillEffect item;
         bool isFirst = true;
         double threshold, r, g, b, invert;
+        ColorMode colorMode;
 
         readonly AlphaFillCustomEffect? effect;
         readonly ID2D1Image? output;
@@ -57,6 +59,7 @@ namespace YMM4SamplePlugin.VideoEffect.SampleHLSLShaderVideoEffect
             var g = item.Color.G / 255f;
             var b = item.Color.B / 255f;
             var invert = item.Invert ? 1 : 0;
+            var colorMode = item.ColorMode;
 
             if (isFirst || this.threshold != threshold)
                 effect.Threshold = (float)threshold;
@@ -73,6 +76,11 @@ namespace YMM4SamplePlugin.VideoEffect.SampleHLSLShaderVideoEffect
             if (isFirst || this.invert != invert)
                 effect.Invert = invert;
 
+            if (isFirst || this.colorMode != colorMode)
+            {
+                effect.KeepColor = colorMode == ColorMode.KeepColor ? 1 : 0;
+            }
+
             isFirst = false;
 
             this.threshold = threshold;
@@ -80,6 +88,7 @@ namespace YMM4SamplePlugin.VideoEffect.SampleHLSLShaderVideoEffect
             this.g = g;
             this.b = b;
             this.invert = invert;
+            this.colorMode = colorMode;
 
             return effectDescription.DrawDescription;
         }

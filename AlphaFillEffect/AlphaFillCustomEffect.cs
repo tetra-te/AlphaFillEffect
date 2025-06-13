@@ -37,6 +37,12 @@ namespace YMM4SamplePlugin.VideoEffect.SampleHLSLShaderVideoEffect
             get => GetFloatValue((int)EffectImpl.Properties.Invert);
         }
 
+        public float KeepColor
+        {
+            set => SetValue((int)EffectImpl.Properties.KeepColor, value);
+            get => GetFloatValue((int)EffectImpl.Properties.KeepColor);
+        }
+
         public AlphaFillCustomEffect(IGraphicsDevicesAndContext devices) : base(Create<EffectImpl>(devices))
         {
         }
@@ -102,6 +108,17 @@ namespace YMM4SamplePlugin.VideoEffect.SampleHLSLShaderVideoEffect
                 }
             }
 
+            [CustomEffectProperty(PropertyType.Float, (int)Properties.KeepColor)]
+            public float KeepColor
+            {
+                get => constantBuffer.KeepColor;
+                set
+                {
+                    constantBuffer.KeepColor = value;
+                    UpdateConstants();
+                }
+            }
+
             public EffectImpl() : base(ShaderResourceLoader.GetShaderResource("PixelShader.cso"))
             {
 
@@ -130,6 +147,7 @@ namespace YMM4SamplePlugin.VideoEffect.SampleHLSLShaderVideoEffect
                 public float G;
                 public float B;
                 public float Invert;
+                public float KeepColor;
             }
             public enum Properties
             {
@@ -137,7 +155,8 @@ namespace YMM4SamplePlugin.VideoEffect.SampleHLSLShaderVideoEffect
                 R = 1,
                 G = 2,
                 B = 3,
-                Invert = 4
+                Invert = 4,
+                KeepColor = 5,
             }
         }
     }

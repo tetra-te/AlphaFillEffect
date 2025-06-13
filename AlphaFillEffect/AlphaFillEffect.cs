@@ -5,6 +5,8 @@ using YukkuriMovieMaker.Controls;
 using YukkuriMovieMaker.Exo;
 using YukkuriMovieMaker.Player.Video;
 using YukkuriMovieMaker.Plugin.Effects;
+using AlphaFillEffect;
+using YukkuriMovieMaker.ItemEditor.CustomVisibilityAttributes;
 
 namespace YMM4SamplePlugin.VideoEffect.SampleHLSLShaderVideoEffect
 {
@@ -13,7 +15,13 @@ namespace YMM4SamplePlugin.VideoEffect.SampleHLSLShaderVideoEffect
     {
         public override string Label => "塗りつぶしアルファ";
 
+        [Display(GroupName = "塗りつぶしアルファ", Name = "モード", Description = "モード")]
+        [EnumComboBox]
+        public ColorMode ColorMode { get => colorMode; set => Set(ref colorMode, value); }
+        ColorMode colorMode = ColorMode.Overwrite;
+
         [Display(GroupName = "塗りつぶしアルファ", Name = "色", Description = "塗りつぶしの色")]
+        [ShowPropertyEditorWhen(nameof(ColorMode), ColorMode.Overwrite)]
         [ColorPicker]
         public Color Color { get => color; set => Set(ref color, value); }
         Color color = Colors.White;
